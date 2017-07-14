@@ -1,0 +1,35 @@
+require("./index.src.html");
+require("./index.scss");
+
+//
+// now this page's own ES2015
+// this page has only the one controller but also loads the site config
+//
+
+import { STARTING_WORDS } from './config';
+
+
+// having imported it, you can indeed use it here
+// and mix your ES2015 with plain, expedient jQuery
+$(document).ready(() => {
+    $('span').text("JQuery says: " + STARTING_WORDS);
+});
+
+
+
+//
+// AngularJS + ES2015 Classes = Sweetness
+//
+class PageController {
+  constructor($scope) {
+      this.setupWords();
+  }
+
+  setupWords() {
+    this.textwords = STARTING_WORDS;
+  }
+}
+
+PageController.$inject = ['$scope' ];
+
+angular.module('app', []).controller('PageController', PageController);
